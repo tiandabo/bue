@@ -1,0 +1,15 @@
+.mint-indexlist-navitem {
+	font-size: .25rem;
+}
+.mint-cell-wrapper {
+	font-size: .3rem;
+	border-bottom: 1px solid #9B9A99;
+	padding: .2rem;
+}
+.mint-indexsection-index {
+	background: #F7F5F3;
+	font-size: .3rem;
+}
+.mint-cell-wrapper .mint-cell-title {
+	display: none;
+}
