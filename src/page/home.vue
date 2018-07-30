@@ -1,18 +1,19 @@
 <template>
 	<div class="home">
 		<header class="head">
+			<div class="logo">
+				<span>bue</span>
+			</div>
 			<div class="address">
 					<router-link to='/address' class='link'>
-						<span>{{address.name}}</span>
+						<span>{{address.name}}市</span>
 						<img src="../../static/icon/下 拉.svg" />
 					</router-link>
 			</div>
 			<div class="search">
-				<img src="../../static/icon/搜索.svg" />
-				<span>搜索店铺名称</span>
-			</div>
-			<div class="mina">
-				<img src="../../static/icon/我的.svg" />
+				<router-link to="/search">
+					<img src="../../static/icon/搜索.svg" />
+				</router-link>
 			</div>
 		</header>
 		<ul class="shop-list"  
@@ -59,9 +60,8 @@
 				bottom: true,
 			}
 		},
-		mounted(){
+		beforeMount(){
 			this.positionInformation();
-//			this.shopList()
 		},
 		methods: {
 			...mapMutations([
@@ -80,7 +80,8 @@
 			async shopList() {
 				let geohash = 'latitude='+this.address.latitude+'&longitude='+this.address.longitude
 				let res = await axios.axiosget('shopping/restaurants?'+geohash+'&limit=10&offset='+this.shoplength);
-//				console.log(res)
+				console.log(res)
+				console.log(this.positions)
 				this.shopLists = [...this.shopLists,...res.data]
 				this.shoplength = this.shopLists.length;
 				if(res.data.length == 0) {
@@ -111,7 +112,7 @@
 	.head {
 		height: .65rem;
 		display: flex;
-		justify-content: space-around;
+		justify-content: space-between;
 		align-items: center;
 		background: #F2880B;
 		font-size: .25rem;
@@ -119,36 +120,22 @@
 			.link {
 				color: #fff;
 				text-decoration: none;
-			}
-			
-			span {
-				margin-right: -0.1rem;
+				font-size: .3rem;
 				display: inline-block;
-				line-height: 100%;
-				max-width: .8rem;
-				overflow: hidden;
-				white-space: nowrap;
-				text-overflow:  ellipsis;
+				display: flex;
+				justify-content: center;
+				align-items: center;
 			}
 			img {
-				width: .4rem;
-				vertical-align: bottom;
+				width: .5rem;
+				// vertical-align: bottom;
 			}
 		}
 		.search {
-			width: 65%;
-			height: .45rem;
-			/*line-height: .45rem;*/
-			/*padding: 0 .2rem;*/
-			border-radius: .225rem;
-			background: rgba(255,255,255,.4);
-			display: flex;
-			align-items: center;
-			font-size: .25rem;
-			color: #9B9A99;
 			img {
-				width: .3rem;
-				margin: 0 .1rem 0 .3rem;
+				width: .4rem;
+				// vertical-align: top;
+				margin-right: .2rem;
 			}
 		}
 		.mina {
@@ -156,6 +143,11 @@
 				width: .3rem;
 			}
 		}
+	}
+	.logo {
+		margin-left: .2rem;
+		font-size: .3rem;
+		color: #fff;
 	}
 	.shop-list {
 		margin-top: .65rem;

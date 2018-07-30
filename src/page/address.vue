@@ -1,10 +1,8 @@
 <template>
 	<div class="address">
-		<header>
-			<router-link to='/'><img src="../../static/icon/下 拉.svg"/></router-link>
-			<span>获取位置</span>
-			<span></span>
-		</header>
+		<heads title='获取位置'>
+			<span slot="right"></span>
+		</heads>
 		<div class="search-city">
 			<span>
 				<img src="../../static/icon/位置.svg"/>
@@ -30,6 +28,7 @@
 	import {mapState, mapMutations} from 'vuex';
 	import Vue from 'vue'
 	import { IndexList, IndexSection } from 'mint-ui';
+	import heads from '@/components/head';
 	Vue.component(IndexList.name, IndexList);
 	Vue.component(IndexSection.name, IndexSection)
 	export default {
@@ -62,7 +61,10 @@
 		},
 		computed: mapState([
 			 'positions'
-		])
+		]),
+		components: {
+			heads
+		}
 
 	}
 </script>
@@ -71,24 +73,6 @@
 	.address {
 		font-size: .36rem;
 		width: 100%;
-	}
-	header {
-		height: .65rem;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		background: #F2880B;
-		font-size: .32rem;
-		color: #fff;
-		img {
-			/*margin-left: .2rem;*/
-			width: .65rem;
-			vertical-align: middle;
-			transform: rotate(90deg);
-		}
-		span {
-			margin-right: .4rem;
-		}
 	}
 	.search-city {
 		height: .8rem;
